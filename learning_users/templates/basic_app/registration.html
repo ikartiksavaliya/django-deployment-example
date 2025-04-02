@@ -1,0 +1,20 @@
+{%extends 'basic_app/base.html' %}
+{%load staticfiles%}
+
+{%block body_block%}
+<div class="jumbotron">
+  {%if registered %}
+  <h1>thank you for registering</h1>
+  {%else%}
+  <h1>register here</h1>
+  <h3>fill out the form</h3>
+
+  <form enctype="multipart/form-data" method="post" action="{% url 'basic_app:register' %}">
+    {%csrf_token%}
+    {{user_form.as_p}}
+    {{profile_form.as_p}}
+    <button type="submit" name="button"value="submit">Register</button>
+  </form>
+  {%endif%}
+</div>
+{%endblock%}
