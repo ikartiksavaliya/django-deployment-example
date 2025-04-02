@@ -3,7 +3,7 @@ from basic_app.forms import UserForm, UserProfileInfoForm
 
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponseRedirect,HttpResponse
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -75,8 +75,8 @@ def user_login(request):
                 return HttpResponse ('account not active')
         else:
             print('someone tried to login and failed')
-            print('username:{username} password {password}'.format(username,password))
-            return HttpResponse('invalid login detailed supplied')
+            print('username:{} password {}'.format(username,password))
+            return render(request, 'basic_app/login.html', {'error_message': 'Invalid login details supplied'})
 
     else:
         return render(request,'basic_app/login.html',{})
